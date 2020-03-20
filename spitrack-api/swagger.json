@@ -1,0 +1,240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger SpiTrack.",
+    "version": "1.0.0",
+    "title": "Swagger SpiTrack",
+
+    "contact": {
+      "email": "ritikagoel88@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/spitrack",
+
+  "schemes": ["http"],
+  "paths": {
+    "/requestPO": {
+      "post": {
+        "summary": "Request PO",
+        "description": "Request PO",
+        "operationId": "requestPO",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PO object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PO"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/acceptPO": {
+      "post": {
+        "summary": "Accept PO",
+        "description": "Accept PO",
+        "operationId": "acceptPO",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PO ID object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/POID"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/rejectPO": {
+      "post": {
+        "summary": "Reject PO",
+        "description": "Reject PO",
+        "operationId": "rejectPO",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PO ID object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/POID"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+       }
+      },
+    "/getPODetails": {
+      "post": {
+        "summary": "Get PO",
+        "description": "Get PO",
+        "operationId": "getPODetails",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PO object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/POID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/PO"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/getPOHistory": {
+    "post": {
+      "summary": "Get PO History",
+      "description": "Get PO History",
+      "operationId": "getPOHistory",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "LC object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/POID"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PO"
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid status value"
+        }
+      }
+    }
+  }
+  },
+  "definitions": {
+    "PO": {
+      "type": "object",
+      "properties": {
+        "purchaseOrderId": {
+          "type": "string",
+          "description": "purchaseOrderId"
+        },
+        "parentOrderId": {
+          "type": "string",
+          "description": "parentOrderId"
+        },
+        "childOrderId": {
+          "type": "string",
+          "description": "childOrderId"
+        },
+        "issueDate": {
+          "type": "string",
+          "description": "issueDate"
+        },
+        "sender": {
+          "type": "string",
+          "description": "sender"
+        },
+        "receiver": {
+          "type": "string",
+          "description": "receiver"
+        },
+        "gradeType": {
+          "type": "string",
+          "description": "gradeType"
+        },
+        "amount": {
+          "type": "number",
+          "description": "amount"
+        },
+        "price": {
+          "type": "number",
+          "description": "price"
+        },
+        "status": {
+          "type": "string",
+          "description": "status"
+        },
+        "materialName": {
+          "type": "string",
+          "description": "materialName"
+        },
+        "materialType": {
+          "type": "string",
+          "description": "materialType"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "quantity"
+        },
+        "units": {
+          "type": "string",
+          "description": "units"
+        }
+      }
+    },
+    "POID": {
+      "type": "object",
+      "properties": {
+        "purchaseOrderId": {
+          "type": "string",
+          "description": "purchaseOrderId"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
+

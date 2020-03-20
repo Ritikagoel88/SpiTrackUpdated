@@ -1,0 +1,162 @@
+{
+  "name": "spitrackcc",
+  "x-type": "hlfv1",
+  "x-commitTimeout": 300,
+  "version": "1.0.0",
+  "client": {
+    "organization": "Supplier",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300",
+          "eventHub": "300",
+          "eventReg": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "channels": {
+    "spitrackchannel": {
+        "orderers": [
+          "orderer.spitrack.com"
+        ],
+        "peers": {
+            "peer0.Importer.spitrack.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "eventSource": true
+          },
+            "peer0.Exporter.spitrack.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "eventSource": true
+          },
+            "peer0.Supplier.spitrack.com": {
+            "endorsingPeer": true,
+            "chaincodeQuery": true,
+            "eventSource": true
+                  }
+                }
+            }
+        },  
+    "organizations": {      
+
+      "Importer": {
+        "mspid": "ImporterMSP",
+        "peers": [
+            "peer0.Importer.spitrack.com"
+        ],
+        "certificateAuthorities": [
+          "ca.Importer.spitrack.com"
+        ]
+    },
+
+
+      "Exporter": {
+        "mspid": "ExporterMSP",
+        "peers": [
+            "peer0.Exporter.spitrack.com"
+        ],
+        "certificateAuthorities": [
+          "ca.Exporter.spitrack.com"
+        ]
+    },
+
+
+      "Supplier": {
+        "mspid": "SupplierMSP",
+        "peers": [
+            "peer0.Supplier.spitrack.com"
+        ],
+        "certificateAuthorities": [
+          "ca.Supplier.spitrack.com"
+        ]
+    }
+      },
+  "orderers":{
+    "orderer.spitrack.com": {
+      "url": "grpc://10.64.82.92:7050",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer.spitrack.com",
+        "grpc.keepalive_time_ms": 600000,
+        "grpc.max_send_message_length": 15728640,
+        "grpc.max_receive_message_length": 15728640
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICRzCCAe6gAwIBAgIRAKpMAQf+8H0lKj/eQT2BsQswCgYIKoZIzj0EAwIwbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDHNwaXRyYWNrLmNvbTEbMBkGA1UEAxMSdGxzY2Eu\nc3BpdHJhY2suY29tMB4XDTIwMDMyMDA5MDQwMFoXDTMwMDMxODA5MDQwMFowbjEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xFTATBgNVBAoTDHNwaXRyYWNrLmNvbTEbMBkGA1UEAxMSdGxzY2Eu\nc3BpdHJhY2suY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE7zYIvsIDsOUJ\nm0wAoM2lU69Zm9vtvbsrmH/2HcbPyqHPxXDVFdFtdUei3EPC94GHocO6RrwZ11n2\nlbI1tumnoKNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMC\nBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCC8PzMTLpON3OhN\nMJkuuDD5jVW85O5o7Vh/k/UN6l86ujAKBggqhkjOPQQDAgNHADBEAiAFU67ldRl8\nmnlHB05zuU0NbQazGTiJmS1n4okBIb2ZywIgEDTDrR7I0SeGDw1rDvi33nN8StP1\n9fx83XAFO/IRnxY=\n-----END CERTIFICATE-----\n"
+      }
+    }
+  },
+  "peers": {
+
+     "peer0.Importer.spitrack.com": {
+      "url": "grpc://10.64.82.92:7051",
+      "eventUrl": "grpc://10.64.82.92:7053",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.Importer.spitrack.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhOgAwIBAgIQFSCJSP93bwUCrC+SuaB9FjAKBggqhkjOPQQDAjCBgDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHjAcBgNVBAoTFUltcG9ydGVyLnNwaXRyYWNrLmNvbTEkMCIGA1UE\nAxMbdGxzY2EuSW1wb3J0ZXIuc3BpdHJhY2suY29tMB4XDTIwMDMyMDA5MDQwMFoX\nDTMwMDMxODA5MDQwMFowgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y\nbmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR4wHAYDVQQKExVJbXBvcnRlci5z\ncGl0cmFjay5jb20xJDAiBgNVBAMTG3Rsc2NhLkltcG9ydGVyLnNwaXRyYWNrLmNv\nbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLy234tUh3VXLXbCwYTqifD22Pmu\nO7bs+dNjcIdDFCYpwpXbMxpgYXxWZGWYZD7/Nu1Fw4M4Ido1J3AZLeS4AqGjbTBr\nMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEw\nDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgxQ2468o8ybUIyf73dKnmbqx20jgF\nrDjamDstovqEujcwCgYIKoZIzj0EAwIDSAAwRQIhALLE9X8LF5EQ58e3WjLiil8a\n4A7X/BqDT+XtMSGI8OQJAiAw5Dmz+w/wlOm5FLux1mrR9+sllOoNdXSq8m9dCP7T\nOg==\n-----END CERTIFICATE-----\n"
+      }
+    },
+
+
+     "peer0.Exporter.spitrack.com": {
+      "url": "grpc://10.64.82.92:7051",
+      "eventUrl": "grpc://10.64.82.92:7053",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.Exporter.spitrack.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhOgAwIBAgIQFSCJSP93bwUCrC+SuaB9FjAKBggqhkjOPQQDAjCBgDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHjAcBgNVBAoTFUltcG9ydGVyLnNwaXRyYWNrLmNvbTEkMCIGA1UE\nAxMbdGxzY2EuSW1wb3J0ZXIuc3BpdHJhY2suY29tMB4XDTIwMDMyMDA5MDQwMFoX\nDTMwMDMxODA5MDQwMFowgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y\nbmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR4wHAYDVQQKExVJbXBvcnRlci5z\ncGl0cmFjay5jb20xJDAiBgNVBAMTG3Rsc2NhLkltcG9ydGVyLnNwaXRyYWNrLmNv\nbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLy234tUh3VXLXbCwYTqifD22Pmu\nO7bs+dNjcIdDFCYpwpXbMxpgYXxWZGWYZD7/Nu1Fw4M4Ido1J3AZLeS4AqGjbTBr\nMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEw\nDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgxQ2468o8ybUIyf73dKnmbqx20jgF\nrDjamDstovqEujcwCgYIKoZIzj0EAwIDSAAwRQIhALLE9X8LF5EQ58e3WjLiil8a\n4A7X/BqDT+XtMSGI8OQJAiAw5Dmz+w/wlOm5FLux1mrR9+sllOoNdXSq8m9dCP7T\nOg==\n-----END CERTIFICATE-----\n"
+      }
+    },
+
+      
+      "peer0.Supplier.spitrack.com": {
+      "url": "grpc://10.64.82.92:8051",
+      "eventUrl": "grpc://10.64.82.92:8053",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.Supplier.spitrack.com",
+        "hostnameOverride": "peer0.Supplier.spitrack.com"
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhOgAwIBAgIQBp63BTFhL6LPQZTU6qgPFDAKBggqhkjOPQQDAjCBgDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHjAcBgNVBAoTFVN1cHBsaWVyLnNwaXRyYWNrLmNvbTEkMCIGA1UE\nAxMbdGxzY2EuU3VwcGxpZXIuc3BpdHJhY2suY29tMB4XDTIwMDMyMDA5MDQwMFoX\nDTMwMDMxODA5MDQwMFowgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y\nbmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR4wHAYDVQQKExVTdXBwbGllci5z\ncGl0cmFjay5jb20xJDAiBgNVBAMTG3Rsc2NhLlN1cHBsaWVyLnNwaXRyYWNrLmNv\nbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHS6PRBVU8XbGZs/3DDXKye0T5uu\nsVfumVgb+q0rbLzoxrra9IIBGrG88/tviXkIQ3nwSiM+8dqTiCBsZPC4JvyjbTBr\nMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEw\nDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgEPI4VnLSq5GxaGpbB/Xciys7Xpvw\nSm3W28aDn+Ib/FowCgYIKoZIzj0EAwIDSAAwRQIhAIut3ZE5ka4ImJ/jTmztDGXQ\nbn2Fiv9OGP6Z4lrw0E8YAiBInoj3k46N05Fkd9m4EtLJWuYPw5M7STPE2Z8MQvdG\nPA==\n-----END CERTIFICATE-----\n"
+      }
+    }
+   },
+    "certificateAuthorities":{
+    "ca.Importer.spitrack.com": {
+      "url": "http://10.64.82.92:7054",
+      "caName": "ca.Importer.spitrack.com",
+      "httpOptions": {
+        "verify": false
+      },
+      "tlsCACerts": {
+        "pem":"-----BEGIN CERTIFICATE-----\nMIICZDCCAgugAwIBAgIQCKPi18cMqVFKrEWt9puK7TAKBggqhkjOPQQDAjB9MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEeMBwGA1UEChMVSW1wb3J0ZXIuc3BpdHJhY2suY29tMSEwHwYDVQQD\nExhjYS5JbXBvcnRlci5zcGl0cmFjay5jb20wHhcNMjAwMzIwMDkwNDAwWhcNMzAw\nMzE4MDkwNDAwWjB9MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVSW1wb3J0ZXIuc3BpdHJh\nY2suY29tMSEwHwYDVQQDExhjYS5JbXBvcnRlci5zcGl0cmFjay5jb20wWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAAQQoZYWIAsbLVAf7++DvlKO6O9b/EHY6/Lq5FMK\nxzcW6uxlHGks995Y/sCiNeluqiIrlDeF3CR+buq5WOLkLUnRo20wazAOBgNVHQ8B\nAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB\n/wQFMAMBAf8wKQYDVR0OBCIEIMOyI8l7KfS+m9F5foYFDFWHTEahyYlKPz6UYpGC\nUkS+MAoGCCqGSM49BAMCA0cAMEQCIBScySQ1195IxzREQhVTOouhl5X403XBdZIR\nnNTh6GJNAiAEir9XwCirZkucIWaZWn+XpKS767vO+EJlZcEnWiaLvQ==\n-----END CERTIFICATE-----\n"
+      }
+    },
+    "ca.Exporter.spitrack.com": {
+      "url": "http://10.64.82.92:8054",
+      "caName": "ca.Exporter.spitrack.com",
+      "httpOptions": {
+        "verify": false
+      },
+      "tlsCACerts": {
+        "pem":"-----BEGIN CERTIFICATE-----\nMIICZTCCAgugAwIBAgIQKHdeU9k+NvfezC9VoYDM7zAKBggqhkjOPQQDAjB9MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEeMBwGA1UEChMVRXhwb3J0ZXIuc3BpdHJhY2suY29tMSEwHwYDVQQD\nExhjYS5FeHBvcnRlci5zcGl0cmFjay5jb20wHhcNMjAwMzIwMDkwNDAwWhcNMzAw\nMzE4MDkwNDAwWjB9MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVRXhwb3J0ZXIuc3BpdHJh\nY2suY29tMSEwHwYDVQQDExhjYS5FeHBvcnRlci5zcGl0cmFjay5jb20wWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAARO1zqZAi3KVcrzWigdEABsxYaaz7XneixUYf1z\nhuizUypvX332Nm+dIMcwKLlb94eyXh0pd2DGlpK0pM9yMoOro20wazAOBgNVHQ8B\nAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB\n/wQFMAMBAf8wKQYDVR0OBCIEINDPsbHjdUWpX6y02b3i+j/tT7dtcUrPrYD1+yE3\nfA2tMAoGCCqGSM49BAMCA0gAMEUCIQC6UAwONLHcYKRbHqkZdyAl4IxBU6NNhjYW\nPLY6jDsB7gIgOr7rkXejuYGbIFb7zoR3rqW/2tbvG6vFqk8xz40PWjg=\n-----END CERTIFICATE-----\n"
+      }
+    },
+    "ca.Supplier.spitrack.com": {
+      "url": "http://10.64.82.92:9054",
+      "caName": "ca.Supplier.spitrack.com",
+      "httpOptions": {
+        "verify": false
+      },
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICZDCCAgugAwIBAgIQM3HOK1rBIPpMht1NaFP07TAKBggqhkjOPQQDAjB9MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEeMBwGA1UEChMVU3VwcGxpZXIuc3BpdHJhY2suY29tMSEwHwYDVQQD\nExhjYS5TdXBwbGllci5zcGl0cmFjay5jb20wHhcNMjAwMzIwMDkwNDAwWhcNMzAw\nMzE4MDkwNDAwWjB9MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVU3VwcGxpZXIuc3BpdHJh\nY2suY29tMSEwHwYDVQQDExhjYS5TdXBwbGllci5zcGl0cmFjay5jb20wWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAARNrp8yTo747S3MGN6DlIG4NTAYXbmqjp/ZA9sC\nEVlHrMy9opB9lS1qFOfJH4DX7GPhL/YmcXZIyCKNvzyUzo8To20wazAOBgNVHQ8B\nAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB\n/wQFMAMBAf8wKQYDVR0OBCIEIEeSBW9KrJSjNbv1yaC08TJ5w2suLhv1AjxcwdZb\n856IMAoGCCqGSM49BAMCA0cAMEQCICkl08CX7NlMlQjK3VA+9hqqvHr0Go3trQht\n2udojsf9AiA+BCH66MG/c3YYm2IGsrpQBxOCW6udmmWuM5dzqxNZvw==\n-----END CERTIFICATE-----\n"
+      }
+    }
+    }
+    }
+    
